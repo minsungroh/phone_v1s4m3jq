@@ -7,7 +7,7 @@
 
 <% 
 P_contentVO p_contentVO = (P_contentVO)request.getAttribute("p_contentVO");  
-
+//int mno = (Integer)request.getAttribute("mno");
 %>
 
 <!DOCTYPE html>
@@ -52,6 +52,7 @@ function buy1(){
   </div> 
   
      <DIV>
+          <FORM name='frm' method='POST' action ='../cart/create.do'>
           <fieldset style="width: 1000px; height: 500px; margin: 20px auto;">
          <br><br>
  
@@ -81,10 +82,27 @@ function buy1(){
                   <button type='button' onclick="location.href='#'" >장바구니</button>
               </c:otherwise>
             </c:choose>
+            
+<%--             <%
+             if(mno >= 1){
+            	 %>
+            	 <button type='button' onclick="buy(<%=p_contentVO.getP_contentno()%>, ${mno })" style="margin-left: 600px;">바로구매</button>
+                 <button type='button' onclick="location.href='#'" >장바구니</button>
+                 <%
+             }else{
+            	    %>
+           
+            	  <button type='button' onclick="buy1()" style="margin-left: 600px;">바로구매</button>
+                  <button type='button' onclick="location.href='#'" >장바구니</button>
+                  <%
+             }
+            %> --%>
+        
           
     
     
           </fieldset>
+          </FORM>
           </DIV>
   <DIV class='content'>
     <FORM name='frm' method="get" action='./update.do'>

@@ -43,6 +43,7 @@ select mno, id, passwd, mname, nname, grade, money, point,  tel, zipcode, addres
 from member
 where mno='2';
 
+select * from member;
 
 5. ¼öÁ¤
 update member
