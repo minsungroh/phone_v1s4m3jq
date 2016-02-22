@@ -53,6 +53,7 @@ function buy1(){
   
      <DIV>
           <FORM name='frm' method='POST' action ='../cart/create.do'>
+          <input type='hidden' name= 'p_contentno' value='<%=p_contentVO.getP_contentno() %>'>
           <fieldset style="width: 1000px; height: 500px; margin: 20px auto;">
          <br><br>
  
