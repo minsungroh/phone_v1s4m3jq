@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.cart.CartMapperInter">
+
+<insert id="create" parameterType="CartVO">
+INSERT INTO p_box(mno,producttitle,productno,cnt,total)
+VALUES (#{mno},#{producttitle},#{productno},#{cnt},#{total})
+</insert>
+
+<!--  결과가 레코드가 한개일경우 CartVO리턴 
+        결과가 2개이상일경우 ArrayList -->
+<select id="list" resultType="CartVO">
+SELECT cartno,mno,producttitle,productno,cnt,total
+FROM p_box
+ORDER BY cartno ASC
+</select>
+<!-- 파라메타에서 값을저장하고 리절트에서 값을 불러온다. -->
+<select id="list2" resultType="CartVO" parameterType="int">
+SELECT cartno,mno,producttitle,productno,cnt,total
+FROM p_box
+WHERE mno = #{mno}
+ORDER BY cartno ASC
+
+</select>
+
+
+<update id="update" parameterType="CartVO">
+UPDATE p_box
+SET cnt=#{cnt}
+WHERE cartno=#{cartno}
+</update>
+
+<delete id="delete" parameterType="int">
+DELETE FROM p_box
+WHERE cartno=#{cartno}
+</delete>
+
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.deliveryaddr.DeliveryAddrMapperInter">
+
+  <insert id="create" parameterType="DeliveryAddrVO">
+      insert into deliveryaddr(dcategory, dname, dzipcode, daddr1, daddr2, dphone, mno)
+      values(#{dcategory}, #{dname}, #{dzipcode}, #{daddr1}, #{daddr2}, #{dphone}, #{mno})
+  </insert>
+  
+  <select id="list" resultType="DeliveryAddrVO">
+  select dno, dcategory, dname, dzipcode, daddr1, daddr2, dphone, mno
+  from deliveryaddr
+  where mno=#{mno}
+  </select>
+  
+  <select id="read" resultType="DeliveryAddrVO" parameterType="int">
+    select dno, dcategory, dname, dzipcode, daddr1, daddr2, dphone, mno
+    from deliveryaddr
+    where mno=#{mno}
+  </select>
+  
+  <update id="update" parameterType="DeliveryAddrVO">
+    update deliveryaddr 
+    set dcategory=#{dcategory}, dname=#{dname}, dzipcode=#{dzipcode}, daddr1=#{daddr1}, daddr2=#{daddr2}, dphone=#{dphone}
+    where dno=#{dno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from deliveryaddr 
+    where dno=#{dno}
+  </delete>
+</mapper>

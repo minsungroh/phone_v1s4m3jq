@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.mypage.MypageMapperInter">
+  <insert id="create" parameterType="MypageVO">
+    insert into mypage(orderstate, ordersubmit, my_state, mwaybil, mwaybil2, takeback_state, replace_state, payno, mno)
+    values(#{orderstate}, 'N', #{my_state}, #{mwaybil}, #{mwaybil2}, 'N', 'N', #{payno}, #{mno});
+  </insert>
+
+  <select id="read" resultType="MypageVO" parameterType="MypageVO">
+    select mypageno, orderstate, ordersubmit, payno, mno
+    from mypage
+    where mno=#{mno}
+  </select>
+  
+  <select id="count_paywait" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='결제대기중' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+  <select id="count_payok" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='결제완료' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+  <select id="count_pready" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='상품준비중' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+  <select id="count_delivery" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='배송중' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+   <select id="count_okwait" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='구매 결정 대기' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+ <select id="count_ok" resultType="int" parameterType="int">
+    select count(m.mypageno) as cnt
+    from mypage m
+    join payment p on m.payno = p.payno 
+    where m.my_state='구매완료' and m.mno=#{mno}
+    and date(p.payday) &gt;= date(subdate(now(), INTERVAL 30 DAY)) 
+    and date(p.payday) &lt;= date(now())
+  </select>
+  
+  <select id="list" resultType="MypageVO" parameterType="MypageVO">
+    select m.mypageno, p.item, p.payfile1, p.pcnt, p.paymoney, p.payday, p.orderno, m.orderstate, m.mno, m.ordersubmit, p.paycharge, m.payno, m.my_state,
+    t.waybil, t.waybil2, t.trace_state, p.payfile1, p.p_contentno, p.p_categoryno, p.payday, m.takeback_state, m.replace_state
+    from mypage as m
+    join payment as p on m.payno = p.payno
+    join trace as t on m.mypageno = t.mypageno
+    where m.mno=#{mno}
+    order by p.payday desc
+    limit #{offset}, #{recordPerPage}
+  </select>
+  
+  <select id="detail_read" resultType="MypageVO" parameterType="MypageVO">
+    select p.item, p.payfile1, p.pcnt, p.paymoney, p.payday, p.orderno, m.orderstate, t.traceno, t.waybil, p.resive_name, p.p_contentno, p.p_categoryno,
+    p.resive_phone, p.resive_post, p.resive_addr1, p.resive_addr2, p.paymeans, p.card_input, p.discount, p.deposit_input, p.phone_input, p.paymoney, p.paymeans,
+    m.orderstate, m.ordersubmit, m.payno, m.mno, m.my_state, t.waybil2, t.payno, m.takeback_state, m.takeback_reason, m.resive_money, m.replace_state, m.replace_reason, m.replace_money
+    from mypage m
+    join payment p on m.payno = p.payno
+    join trace t on m.mypageno = t.mypageno
+    where m.mno=#{mno} and t.waybil=#{waybil}
+  </select>
+  
+  <update id="update_os" parameterType="MypageVO">
+      update mypage as m join payment as p on m.payno = p.payno
+      set m.ordersubmit=#{ordersubmit}, my_state=#{my_state}
+      where m.payno=#{payno}
+  </update>
+  
+  <select id="update_read" resultType="MypageVO" parameterType="MypageVO">
+    select m.mypageno, m.orderstate, m.ordersubmit, m.payno, m.mno, p.paycharge, p.paymoney
+    from mypage as m
+    join payment as p on m.payno = p.payno
+    where m.payno=#{payno} and m.mno=#{mno}
+  </select>
+   
+    <select id="read_mypageno" resultType="MypageVO" parameterType="MypageVO">
+    select mypageno, orderstate, ordersubmit, payno, mno
+    from mypage
+    where payno=#{payno}
+  </select>
+  
+   <update id="takeback_update" parameterType="MypageVO">
+    update mypage
+    set takeback_state=#{takeback_state}, takeback_reason=#{takeback_reason}, resive_money=#{resive_money}, my_state=#{my_state}
+    where payno=#{payno}
+   </update>
+   
+   <select id="take_back_cancel" resultType="MypageVO" parameterType="MypageVO">
+      select t.traceno, t.waybil, t.waybil2, t.trace_state, t.payno, t.mypageno, m.mypageno, m.orderstate, m.ordersubmit, m.my_state, m.payno, m.mno
+      from mypage as m
+      join trace as t on m.mypageno = t.mypageno
+      where m.payno = #{payno}
+   </select>
+   
+   <update id="replace_update" parameterType="MypageVO">
+      update mypage
+      set replace_state=#{replace_state}, replace_reason=#{replace_reason}, replace_money=#{replace_money}, my_state=#{my_state}
+      where payno=#{payno}
+   </update>
+   
+   <select id="count_payno" resultType="int">
+      select Count(payno) as cnt
+      from mypage
+   </select>
+</mapper>

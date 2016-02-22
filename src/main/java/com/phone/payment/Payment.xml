@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.payment.PaymentMapperInter">
+
+  <insert id="create" parameterType="PaymentVO">
+     insert into payment(item, orderno, caseno, payfile1, pcnt, paymoney, paycharge, discount_money, p_categoryno, p_contentno, mno)
+     values(#{item}, #{orderno}, #{caseno}, #{payfile1}, #{pcnt}, #{paymoney}, 'N', 0, #{p_categoryno}, #{p_contentno}, #{mno});
+  </insert>
+
+  <select id="read" resultType="PaymentVO" parameterType="PaymentVO">
+    select payno, item, orderno, caseno, payfile1, pcnt, paymoney, paycharge, paymeans, p_contentno, mno, discount_money
+    from payment
+    where p_contentno=#{p_contentno} and caseno=#{caseno} and mno=#{mno}
+  </select>
+  
+  <select id="list" resultType="PaymentVO">
+    select payno, item, payfile1, pcnt, paymoney, paycharge, paymeans, p_contentno, mno
+    from payment
+    where payno=#{payno}
+  </select>
+  
+  <update id="update" parameterType="PaymentVO">
+     update payment
+     set paycharge=#{paycharge}, resive_name=#{resive_name}, resive_post=#{resive_post}, resive_addr1=#{resive_addr1}, resive_addr2=#{resive_addr2}, resive_phone=#{resive_phone}, paymeans=#{paymeans}, payday=now(),
+     card_input=#{card_input}, discount=#{discount}, deposit_input=#{deposit_input}, phone_input=#{phone_input}, pwaybil=#{pwaybil}, pwaybil2=#{pwaybil2}, delivery_memo=#{delivery_memo}
+     where p_contentno=#{p_contentno} and caseno=#{caseno} and mno=#{mno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from payment
+    where payno=#{payno}
+  </delete>
+  
+  <select id="create_read" resultType="PaymentVO" parameterType="PaymentVO">
+    select p.p_contentno, p.mno, c.title, c.content, c.file, c.money, c.productcnt, p.caseno
+    from payment as p
+    join p_content as c on p.p_contentno = c.p_contentno
+    where p_contentno=#{p_contentno} and p.caseno=#{caseno} and p.mno=#{mno}
+  </select>
+  
+   <select id="mypage_read" resultType="PaymentVO" parameterType="PaymentVO">
+      select payno, item, orderno, caseno, payfile1, pcnt, paymoney, paycharge, resive_name, resive_addr1, resive_addr2, resive_phone, paymeans, card_input, discount, deposit_input, phone_input, p_contentno, mno
+      from payment
+      where mno=#{mno} and paycharge=#{paycharge} and caseno=#{caseno}
+  </select>
+  
+  <select id="payno_read" resultType="PaymentVO" parameterType="PaymentVO">
+    select payno, item, orderno, caseno, payfile1, pcnt, paymoney
+    from payment
+    where caseno=#{caseno}
+  </select>
+</mapper>

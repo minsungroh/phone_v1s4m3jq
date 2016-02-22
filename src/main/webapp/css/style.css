@@ -1,0 +1,329 @@
+  *{ 
+    font-family: 맑은 고딕; 
+    font-size: 15px;
+    color: #555555;
+    padding: 0px;
+    margin:  0px;
+  }
+  
+  .table{
+    border-style: solid; /*  실선 */
+    border-width: 1px; /* 선 두께 */
+    border-color: #000000; /* 선 색깔 */
+    border-collapse: collapse; /* 셀 경계선 병합*/
+    margin: 0px auto; /* 가운데 정렬 */  
+    width: 90%;
+  }
+  
+  .th{
+    background-color: #D6F330;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #AAAAAA;
+    color: #555555;
+  }
+
+  .table2{
+    border-style: none; /*  실선 */
+    border-width: 1px; /* 선 두께 */
+    border-color: #AAAAAA; /* 선 색깔 */
+    border-collapse: collapse; /* 셀 경계선 병합*/
+    /* margin: 20px 20px 20px 20px; */ /* 위, 오른쪽, 아래, 왼쪽 */
+    width: 70%; /* 테이블 너비 */
+    margin: 20px auto; /* 20px: 위아래, auto: 좌우, 자동 가운데 정렬*/
+  }
+  
+  .th2{
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: #AAAAAA;
+    
+    border-bottom: solid 2px #AAAAAA;
+    border-left: none;
+    border-right: none;
+    background-color: #FFFF00;
+  }
+
+  .td{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #AAAAAA;
+    text-align: center;
+  }
+    
+  .td2{
+    border-top: none;
+    border-right: none;
+    border-bottom: solid 1px #00FF00;
+    border-left: none;
+    text-align: center;
+  }
+
+  .td3{
+    border-top: none;
+    border-right: none;
+    border-bottom: solid 2px #00FF00;
+    border-left: none;
+    text-align: center;
+  }
+
+  .td_left{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #AAAAAA;
+    text-align: left;
+  }
+  
+  /* 메뉴 구성 시작 */
+  nav{ margin: 5px 5px; }
+  nav > span > a { font-weight: bold; margin: 0px; padding: 2px;
+                         border: 1px solid #3399FF; background: #3399FF;
+                         color: white; text-decoration: none; }
+  nav > span > a:hover { background: #66CCFF; color: white; }                       
+  /* 메뉴 구성 종료 */
+    
+  #topMenu{  /* nav */
+    height: 20px;
+    width: 100%;
+    background-color: #5d5d5d;
+    margin: 0px;
+    padding: 0px 0px 1px 0px;
+    border-radius: 0px;  /* 둥근 모서리 */
+  }
+  
+  #topMenu ul{
+    margin: 0px;
+    padding: 0px; 
+  }
+  
+  #topMenu ul li{
+    margin: 0px;
+    padding: 0px;   
+    list-style: none;  /* 블렛 기호 제거 */
+    color: white;   
+    background-color: #5d5d5d;
+    float: left;        /* li 태그의 출력 방향을 좌측으로 변경 */
+    line-height: 20px;
+    vertical-align: middle; /* 세로 기준 중간 정렬 */
+    text-align: center; 
+  }
+  
+  #topMenu .menuLink{
+    text-decoration: none;  /* 밑줄 제거 */
+    color: white;   
+    display: block;   /* A 관련 영역 전부 링크 설정 */
+    width: 100px;
+    
+  }
+  
+  #topMenu .menuLink:hover {
+    color: #99FF33;
+    background-color: #4d4d4d;
+  }
+    
+  .title{
+    text-align: center;
+    border: solid 1px #AAAAAA;
+    width: 30%;
+    margin: 20px auto; /* 20px: 위아래, auto: 좌우 */
+    padding: 3px; /* 경계선과 내용과의 간격 */
+    background-color: #EEEEEE;  /* 배경색 */
+  }    
+  
+  form ul{
+    margin: 0px 0px;
+    padding: 0px;
+  }
+    
+  form ul li{
+    list-style: none;  /* 블렛 기호 생략 */
+    margin: 10px 10px 10px 0px; /* top right bottom left */
+  }  
+
+  form ul li.right{  /* form -> ul -> li -> class='right' */
+    list-style: none;  /* 블렛 기호 생략 */
+    margin: 10px 30px 10px 0px; /* top right bottom left */
+    text-align: right;
+  }  
+
+  form ul li.center{  /* form -> ul -> li -> class='center' */
+    list-style: none;  /* 블렛 기호 생략 */
+    margin: 20px 10px 20px 0px; /* top right bottom left */
+    text-align: center;
+  }  
+  
+  form ul li span.link{
+    background-color: #fff2cc;
+    border: solid 1px #DDDDDD;
+    padding: 2px;
+  }
+  
+  form ul li span A:LINK{  /* 모든 A 태그의 기본 출력 형태 */
+    color: #333333;
+    text-decoration: none;
+  }
+  
+  form ul li span A:VISITED{  /* 모든 방문한적이있는 A 태그 */
+    color: #333333;
+    text-decoration: none;
+  }
+  
+  form ul li span A:HOVER{ /* 모든 A 태그위에 마우스가 올라간 경우 */
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+      
+  .content{
+    border-top: solid 1px #AAAAAA;
+    border-right: none;
+    border-bottom: solid 1px #AAAAAA;
+    border-left: none;
+    
+    width: 80%;
+    margin: 0px auto 30px auto;
+  } 
+  
+  .content_menu{
+    text-align: left;
+    width: 80%;
+    margin: 30px auto 0px auto;
+  } 
+    
+  .bottom{
+    clear: both;  /* float='left' 속성의 제거 */
+    text-align: center; 
+    margin: 30px auto;
+  }
+ 
+  A:LINK{  /* 모든 A 태그의 기본 출력 형태 */
+    color: #333333;
+    text-decoration: none;
+  }
+  
+  A:VISITED{  /* 모든 방문한적이있는 A 태그 */
+    color: #333333;
+    text-decoration: none;
+  }
+  
+  A:HOVER{ /* 모든 A 태그위에 마우스가 올라간 경우 */
+    color: #5555FF;
+    text-decoration: underline;
+  }
+ 
+  .item_title{
+    color: #000000;
+    text-shadow: -1px -1px 1px gray;  /* 그림자 가로위치, 그림자 새로위치, 번짐 정도, 색상*/ 
+  }
+ 
+  .menu_on_table{
+    width: 100%; 
+    border-bottom: dotted 1px #AAAAAA; 
+    margin: 0px auto; 
+    text-align: right;
+    padding-right: 0px;
+   
+  }
+ 
+   /* 메뉴를 좌측 기준으로 정렬 합니다. */
+   .menu_on_table_left{
+    width: 50%;
+    border-bottom: none 1px #AAAAAA; 
+    margin: 0px auto; 
+    text-align: left;
+    padding-right: 0px;
+    float: left;
+  }
+
+   /* 메뉴를 우측 기준으로 정렬 합니다. */
+   .menu_on_table_right{
+    width: 50%;
+    border-bottom: none 1px #AAAAAA; 
+    margin: 0px auto; 
+    text-align: right;
+    padding-right: 0px;
+    float: right;
+  } 
+ 
+  .box1{
+    border: solid 1px #FF0000; 
+    padding: 0px 3px 0px 3px; 
+    background-color: #FF0000; 
+    color: #FFFFFF;
+    font-family: 맑은 고딕; 
+  }
+ 
+  .box1 A:LINK{  /* 모든 A 태그의 기본 출력 형태 */
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  .box1 A:VISITED{  /* 모든 방문한적이있는 A 태그 */
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  .box1 A:HOVER{ /* 모든 A 태그위에 마우스가 올라간 경우 */
+    color: #DDDDDD;
+    text-decoration: none;
+  } 
+  
+  /* <DIV id='popupCloseDIV'...  */
+  #popupCloseDIV  A:LINK{  /* 모든 A 태그의 기본 출력 형태 */
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  #popupCloseDIV  A:VISITED{  /* 모든 방문한적이있는 A 태그 */
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  
+  #popupCloseDIV  A:HOVER{ /* 모든 A 태그위에 마우스가 올라간 경우 */
+    color: #DDDDDD;
+    text-decoration: none;
+  } 
+ 
+  #popup{
+    position: absolute; 
+    top: 20%; 
+    left: 30%; 
+    width: 250px; 
+    height: 350px; 
+    background-color: #333333; 
+    text-align: center; 
+    color: #FFFFFF; 
+  }
+ 
+ .label{
+   width: 150px;
+   text-align: right;
+   float: left;
+   margin-right: 10px;
+ }
+ 
+ .fieldset{
+   border: none;
+ }
+ 
+ .legend{
+   background-color: #e6ffcc;
+   border: solid 1px #777777;
+ }
+
+/* <UL><LI class='none'>...  */ 
+ ul li.none{
+   list-style: none;
+   text-align: center;
+ }
+ 
+.apple a{
+	text-align : center;
+	font-weight: bold;
+	margin-left : 10px;
+	color: blue;
+}
+
+
+    

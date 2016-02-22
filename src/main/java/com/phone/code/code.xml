@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.code.CodeMapperInter">
+
+  <insert id="create" parameterType="CodeVO">
+    INSERT INTO p_code(sort)
+    VALUES (#{sort})
+  </insert>
+
+  <select id="list" resultType="CodeVO">
+    SELECT codeno, sort
+    FROM p_code 
+    ORDER BY codeno ASC
+  </select>
+  
+  <update id="update" parameterType="CodeVO">
+    UPDATE p_code
+    SET sort=#{sort}
+    WHERE codeno=#{codeno}
+  </update> 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM p_code
+    WHERE codeno=#{codeno}
+  </delete>
+</mapper>
+

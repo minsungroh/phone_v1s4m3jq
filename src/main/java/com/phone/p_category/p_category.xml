@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.p_category.P_categoryMapperInter">
+  <insert id="create" parameterType="P_categoryVO">
+	  INSERT INTO p_category(codeno, title, orderno, visible, ids, cnt)
+	  VALUES (#{codeno}, #{title}, #{orderno}, #{visible}, #{ids}, 0)
+  </insert>
+  
+  <select id="list" resultType="P_categoryVO">
+	  SELECT p_categoryno, title, orderno, visible, ids,cnt,codeno
+	  FROM p_category
+	  ORDER BY p_categoryno ASC;
+  </select>
+
+  <select id="read" resultType="P_categoryVO" parameterType="int">
+    SELECT p_categoryno, title, orderno, visible, ids, cnt, codeno
+    FROM p_category
+    WHERE p_categoryno=#{p_categoryno}
+  </select>  
+  
+  <update id="update" parameterType="P_categoryVO">
+    UPDATE p_category
+	SET codeno=#{codeno}, title=#{title}, orderno=#{orderno}, visible=#{visible}, ids=#{ids}, cnt=#{cnt} 
+	WHERE p_categoryno=#{p_categoryno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM p_category
+    WHERE p_categoryno=#{p_categoryno}
+  </delete>
+  
+  <update id="update_codeno" parameterType="P_categoryVO">
+    UPDATE p_category
+    SET codeno = #{codeno}
+    WHERE p_categoryno=#{p_categoryno}
+  </update>
+  
+  <update id="update_orderno" parameterType="P_categoryVO">
+    UPDATE p_category
+    SET orderno = #{orderno}
+    WHERE p_categoryno=#{p_categoryno}
+  </update>
+  
+  <update id="update_visible" parameterType="P_categoryVO">
+    UPDATE p_category
+    SET visible = #{visible}
+    WHERE p_categoryno=#{p_categoryno}
+  </update> 
+</mapper>
+

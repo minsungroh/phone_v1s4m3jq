@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.trace.TraceMapperInter">
+  <insert id="create" parameterType="TraceVO">
+    insert IGNORE into trace(waybil, waybil2, trace_state, payno)
+    values(#{waybil}, #{waybil2}, '상품준비중', #{payno})
+  </insert>
+
+  <select id="list" resultType="TraceVO" parameterType="TraceVO">
+    select traceno, waybil, waybil2, trace_state, payno, mypageno
+    from trace
+    where waybil=#{waybil} and waybil2=#{waybil2}
+  </select>
+  
+  <select id="read" resultType="TraceVO" parameterType="TraceVO">
+    select t.traceno, t.waybil, t.waybil2, t.trace_state, t.payno, p.payno, p.resive_post, p.resive_addr1, p.resive_addr2, p.resive_phone, p.resive_name, p.item, p.pcnt, t.mypageno
+    from trace t
+    join payment p on t.payno = p.payno
+    where t.waybil=#{waybil} and t.waybil2=#{waybil2}
+  </select>
+  
+  <update id="update" parameterType="TraceVO">
+    update trace
+    set trace_state = #{trace_state}
+    where traceno=#{traceno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from trace
+    where traceno=#{traceno}
+  </delete>
+  
+  <select id="trace_situration_list" resultType="TraceVO" parameterType="TraceVO">
+    select ts.tsno, ts.tsdate, ts.agent, ts.agent_phone, ts.manager, ts.manager_phone, ts.content, ts.traceno, t.traceno, t.waybil, t.waybil2, t.trace_state, t.payno
+    from trace_situation as ts
+    join trace as t on ts.traceno = t.traceno
+    where t.waybil = #{waybil} and t.waybil2 = #{waybil2}
+  </select>
+  
+  <update id="ts_update" parameterType="TraceVO">
+    update trace
+    set trace_state=#{trace_state}
+    where payno=#{payno} and mypageno=#{mypageno}
+  </update>
+  
+  <update id="mypageno_update" parameterType="TraceVO">
+    update trace
+    set mypageno=#{mypageno}
+    where traceno=#{traceno}
+  </update>
+  
+  <select id="trace_read" resultType="TraceVO" parameterType="TraceVO">
+    select traceno, waybil, waybil2, trace_state, payno, mypageno
+    from trace
+    where payno=#{payno}
+  </select>
+  
+  <select id="mypage_read" resultType="TraceVO" parameterType="TraceVO">
+    select t.traceno, t.waybil, t.waybil2, t.trace_state, t.payno, t.mypageno, m.mypageno, m.orderstate, m.ordersubmit, m.my_state, m.payno, m.mno
+    from trace as t
+    join mypage as m on t.mypageno = m.mypageno
+    where t.payno = #{payno}
+  </select>
+  
+  <update id="update_mypage_my_state" parameterType="TraceVO">
+    update trace as t join mypage as m on t.mypageno = m.mypageno
+    set m.my_state=#{my_state}
+    where t.payno = #{payno}
+  </update>
+</mapper>

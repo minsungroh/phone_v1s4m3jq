@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.p_content.P_contentMapperInter">
+  <insert id="create" parameterType="P_contentVO">
+    INSERT INTO p_content(title, content, file, file1, replycnt, money, productcnt, meterial, p_categoryno)
+    VALUES(#{title}, #{content}, #{file}, #{file1}, 0, #{money}, #{productcnt}, #{meterial}, #{p_categoryno})
+  </insert>
+  
+  <!-- 모든 글 목록 -->
+  <select id="list" resultType="P_contentVO">
+    SELECT p_contentno, title, file, file1, replycnt, money, productcnt, meterial,  p_categoryno
+    FROM p_content
+    ORDER BY p_contentno DESC
+  </select> 
+
+  <!-- blogcategoryno 컬럼의 값을 기준으로 게시판별 목록 -->
+  <select id="list2" resultType="P_contentVO" parameterType="P_contentVO">
+    SELECT p_contentno, title, file, file1, replycnt, money, productcnt, meterial,  p_categoryno
+    FROM p_content
+    WHERE p_categoryno = #{p_categoryno}
+    ORDER BY p_contentno DESC
+  </select> 
+
+  <select id="read" resultType="P_contentVO" parameterType="int">
+    SELECT p_contentno, title, content, file, file1, replycnt, money, productcnt, meterial,  p_categoryno
+    FROM p_content
+    WHERE p_contentno=#{p_contentno}
+  </select>
+  
+  <update id="update" parameterType="P_contentVO">
+    UPDATE p_content
+	SET title=#{title}, content=#{content}, file=#{file}, file1=#{file1}, money=#{money}, productcnt=#{productcnt}, meterial=#{meterial}
+	WHERE p_contentno= #{p_contentno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM p_content
+    WHERE p_contentno=#{p_contentno}
+  </delete>
+  
+   <select id="show_list" resultType="P_contentVO" parameterType="P_contentVO">
+    SELECT p_contentno, title, file, file1, replycnt, money, productcnt, meterial, p_categoryno
+    FROM p_content
+    WHERE p_categoryno = #{p_categoryno}
+    ORDER BY p_contentno DESC
+  </select> 
+</mapper>

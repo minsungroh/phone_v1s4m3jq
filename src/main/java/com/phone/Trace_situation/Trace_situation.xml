@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.Trace_situation.Trace_situationMapperInter">
+  <insert id="create" parameterType="Trace_situationVO">
+    insert into trace_situation(tsdate, agent, agent_phone, manager, manager_phone, content, traceno)
+    values(now(), #{agent}, #{agent_phone}, #{manager}, #{manager_phone}, #{content}, #{traceno})
+  </insert>
+  
+  <select id="list" resultType="Trace_situationVO">
+    select tsno, tsdate, agent, agent_phone, manager, manager_phone, content, traceno
+    from trace_situation
+  </select>
+  
+  <select id="read" resultType="Trace_situationVO" parameterType="Trace_situationVO">
+    select ts.tsno, ts.tsdate, ts.agent, ts.agent_phone, ts.manager, ts.manager_phone, ts.content, ts.traceno, t.traceno, t.waybil, t.waybil2, t.trace_state, t.payno, t.mypageno
+    from trace_situation as ts
+    join trace as t on ts.traceno = t.traceno
+    where ts.content = #{content}
+  </select>
+  
+  <update id="update" parameterType="Trace_situationVO">
+    update trace_situation
+    set tsdate = now(), agent = #{agent}, agent_phone = #{agent_phone}, manager=#{manager}, manager_phone=#{manager_phone}, content=#{content}
+    where tsno=#{tsno}
+  </update>
+  
+  <delete id="delete" parameterType="Trace_situationVO">
+    delete from trace_situation
+    where tsno=#{tsno}
+  </delete>
+  
+  <select id="tsno_read" resultType="Trace_situationVO" parameterType="int">
+    select tsno, tsdate, agent, agent_phone, manager, manager_phone, content, traceno
+    from trace_situation
+    where tsno=#{tsno}
+  </select>
+</mapper>

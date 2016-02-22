@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.phone.point.PointMapperInter">
+  <insert id="create" parameterType="PointVO">
+    insert into point(pointdate, point_content, givepoint, usepoint, totalpoint, mno)
+    values(now(), #{point_content}, 1000, 0, 1000, #{mno})
+  </insert>
+  
+  <update id="payno_update" parameterType="PointVO">
+    update point
+    set payno=#{payno}
+    where pointno=#{pointno}
+  </update>
+  
+  <select id="pointno_read" resultType="PointVO" parameterType="PointVO">
+    select pointno, pointdate, point_content, givepoint, usepoint, totalpoint, mno, payno
+    from point
+    where mno=#{mno} and point_content=#{point_content}
+  </select>
+  
+  <insert id="create_point" parameterType="PointVO">
+    insert into point(pointdate, point_content, givepoint, usepoint, totalpoint, mno, payno)
+    values(now(), #{point_content}, #{givepoint}, #{usepoint}, #{totalpoint}, #{mno}, #{payno})
+  </insert>
+</mapper>
