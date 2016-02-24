@@ -1,9 +1,6 @@
   *{ 
     font-family: 맑은 고딕; 
-    font-size: 15px;
-    color: #555555;
-    padding: 0px;
-    margin:  0px;
+    list-style: none;
   }
   
   .table{
@@ -83,25 +80,28 @@
   /* 메뉴 구성 종료 */
     
   #topMenu{  /* nav */
-    height: 20px;
+    height: 40px;
     width: 100%;
-    background-color: #5d5d5d;
+    background-color: white;
     margin: 0px;
     padding: 0px 0px 1px 0px;
     border-radius: 0px;  /* 둥근 모서리 */
+      border: solid 2px;
   }
   
   #topMenu ul{
     margin: 0px;
     padding: 0px; 
+    vertical-align: middle;
   }
   
   #topMenu ul li{
+    list-style: none;
     margin: 0px;
     padding: 0px;   
     list-style: none;  /* 블렛 기호 제거 */
     color: white;   
-    background-color: #5d5d5d;
+    background-color: white;
     float: left;        /* li 태그의 출력 방향을 좌측으로 변경 */
     line-height: 20px;
     vertical-align: middle; /* 세로 기준 중간 정렬 */
@@ -110,11 +110,16 @@
   
   #topMenu .menuLink{
     text-decoration: none;  /* 밑줄 제거 */
-    color: white;   
+    color: gray;   
     display: block;   /* A 관련 영역 전부 링크 설정 */
     width: 100px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+  
     
   }
+  
   
   #topMenu .menuLink:hover {
     color: #99FF33;
@@ -323,6 +328,7 @@
 	font-weight: bold;
 	margin-left : 10px;
 	color: blue;
+	
 }
 
 

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.phone.p_content.P_contentVO" %>
-
 <%
 P_contentVO p_contentVO = (P_contentVO)request.getAttribute("p_contentVO");
 %>
@@ -48,7 +47,9 @@ $(function(){
       </li>
       <li>
         <label class='label' for='fileMF'>Thumb 파일</label>
-        <input type="file" name='fileMF' id='fileMF' >
+        <input type="file" name='fileMF' id='fileMF' ><br><br>
+         <label class='label' for='createthumb'>Thumb 파일 생성</label>
+        <input type="file" name='createthumb' id='createthumb' >
       </li>
       <li>
         <label class='label' for='file1MF'>업로드 파일1</label>

@@ -69,9 +69,18 @@ public class P_contentCont {
     if (fileMF != null){
       if (fileMF.getSize() > 0){
         file = Upload.saveFileSpring(fileMF, absPath);
-        p_contentVO.setFile(file); // 傈价等 颇老疙 历厘
+ 
+       
       }
     }
+   
+    String upDir =absPath;
+    String src = file;
+    String file2 = Tool.preview(upDir, src, 400, 400);
+    System.out.println(file2 + " 积己凳.");
+    p_contentVO.setFile(file2);  //thumb颇老 历厘
+    
+    Tool.deleteFile(file);  //盔夯 颇老昏力
     // --------------------------------------------------
 
     // --------------------------------------------------
@@ -85,6 +94,10 @@ public class P_contentCont {
         p_contentVO.setFile1(file1); // 傈价等 颇老疙 历厘
       }
     }
+    
+   
+   
+   
     // --------------------------------------------------
     
     if (p_contentDAO.create(p_contentVO) == 1){ 
