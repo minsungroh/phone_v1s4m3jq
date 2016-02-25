@@ -47,9 +47,7 @@ $(function(){
       </li>
       <li>
         <label class='label' for='fileMF'>Thumb 파일</label>
-        <input type="file" name='fileMF' id='fileMF' ><br><br>
-         <label class='label' for='createthumb'>Thumb 파일 생성</label>
-        <input type="file" name='createthumb' id='createthumb' >
+        <input type="file" name='fileMF' id='fileMF' >
       </li>
       <li>
         <label class='label' for='file1MF'>업로드 파일1</label>
