@@ -15,11 +15,32 @@
           src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-});
+	 
+	  $('#panel_frm_remove').hide();
+	});
+
+function update(pcnt_id, cartno){
+	  var pcnt = $('#' + pcnt_id).val();
+	  // alert('pcnt: ' + pcnt);
+	  // return;
+	  
+    var update_frm = $("#update_frm");  // frmCreate 폼 검색 
+	  $('#cartno', update_frm).val(cartno);
+	  $('#pcnt', update_frm).val(pcnt);
+	  $('#update_frm').submit();
+	  
+	}
+
+function remove(cartno){
+    // alert(cartno);
+    
+    $('#cartno', frm_remove).attr('value', cartno);
+    //$('#panel_frm_remove').submit;
+    $('#frm_remove').submit();
+  }
 </script>
 
-<script type="text/javascript">
-</script>
+
 </head>
 
 <%-- body 시작 --%>
@@ -30,6 +51,18 @@ $(function(){
   <%
   CartVO blogVO = (CartVO)request.getAttribute("CartVO");
   %>
+ <DIV id='panel_update' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
+<FORM name='update_frm' id='update_frm' method='POST' action='./update2.do'>
+<input type='hidden' name='cartno' id='cartno' > <input type='hidden' name='pcnt' id='pcnt'>
+</FORM>
+</DIV>
+  
+  
+  <DIV id='panel_frm_remove' class='content' style='padding: 10px 0px 10px 0px; background-color: #FFFF00; width: 70%; text-align: center;'>
+    <FORM name='frm_remove' id='frm_remove' method='POST' action='./delete2.do'>
+      <input type='hidden' name='cartno' id='cartno'> 
+    </FORM>
+  </DIV>
   
   <DIV class='title'>개인 장바구니 목록</DIV>
   
@@ -53,9 +86,9 @@ $(function(){
           <th class="th">상품명</th>
           <th class="th">상품이미지</th>
           <th class="th">도착 예정일</th>
-          <th class="th">판매가</th>
+          <th class="th">단가</th>
           <th class="th">수량</th>
-          <th class="th">합계</th>
+          <th class="th">금액</th>
           <th class="th">기타</th>
         </tr>
       
@@ -67,23 +100,30 @@ $(function(){
           for(int index = 0; index < list.size(); index++){
             CartVO vo = list.get(index);
             int cartno = vo.getCartno();
-            int total= vo.getTotal();
-            int cnt = vo.getCnt();
+            int pcnt = vo.getPcnt();
+            int money= vo.getMoney();
+            int tot = pcnt * money;
+            String file = vo.getFile();
             
           %>
           <tr>
             <td class="td"><%=cartno %></td>
             <td class="td_left">
-              <a href="./read.do?cartno=<%=cartno %>&mno=<%=vo.getMno()%>"><%=Tool.textLength(10, vo.getProducttitle())%></a> 
+              <a href="./read.do?cartno=<%=cartno %>&mno=<%=vo.getMno()%>"><%=Tool.textLength(10, vo.getTitle())%></a> 
             </td>
-            <td class="td">이미지</td>
+           
+            <td class="td"><img src="../p_content/storage/<%=file %>" style="float: left; width:100px;"></td>
             <td class="td">도착 예정일</td>
-            <td class="td"><%=vo.getTotal() %></td>
-            <td class="td"><%=vo.getCnt() %></td>
-            <td class="td"><%=total*cnt %></td>
+            <td class="td"><%=money %></td>
             <td class="td">
-              <a href="./update.do?blogno=<%=cartno%>&Mno=<%=vo.getMno()%>"><img src="./images/update.png" title="수정" /></a>
-              <a href="./delete.do?blogno=<%=cartno %>&Mno=<%=vo.getMno()%>"><img src="./images/delete.png" title="삭제" /></a>
+            <input type='number' name='pcnt' id='pcnt_<%=index %>'   value='<%=pcnt %>' required="required" maxlength="3">
+            <a href="javascript: update('pcnt_<%=index%>', <%=cartno%>)"><img src="./images/update.png" title="수정" /></a>
+            </td>
+            <td class="td"><%=tot %></td>
+            <td class="td">
+              
+              <A href="javascript: remove(<%=cartno%>)"><img src="./images/delete.png" title="삭제" /></a>
+             <%=vo.getMno()%>
             </td>
           </tr>
           <%  

@@ -47,5 +47,15 @@ public class CartDAO implements CartMapperInter{
 	public ArrayList<CartVO> list2(int mno) {
 		return mapper().list2(mno);
 	}
+
+	@Override
+	public int delete2(int cartno) {
+		return mapper().delete2(cartno);
+	}
+
+	@Override
+	public int update2(CartVO cartVO) {
+		return mapper().update2(cartVO);
+	}
 	
 }

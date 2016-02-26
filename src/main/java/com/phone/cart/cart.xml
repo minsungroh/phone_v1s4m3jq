@@ -5,38 +5,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.phone.cart.CartMapperInter">
 
-<insert id="create" parameterType="CartVO">
-INSERT INTO p_box(mno,producttitle,productno,cnt,total)
-VALUES (#{mno},#{producttitle},#{productno},#{cnt},#{total})
-</insert>
 
-<!--  결과가 레코드가 한개일경우 CartVO리턴 
-        결과가 2개이상일경우 ArrayList -->
-<select id="list" resultType="CartVO">
-SELECT cartno,mno,producttitle,productno,cnt,total
-FROM p_box
-ORDER BY cartno ASC
-</select>
-<!-- 파라메타에서 값을저장하고 리절트에서 값을 불러온다. -->
-<select id="list2" resultType="CartVO" parameterType="int">
-SELECT cartno,mno,producttitle,productno,cnt,total
-FROM p_box
-WHERE mno = #{mno}
-ORDER BY cartno ASC
+	<insert id="create" parameterType="CartVO">
+		INSERT INTO p_box(pcnt, tot, mno, p_contentno)
+		VALUES (#{pcnt},#{tot},#{mno},#{p_contentno})
+	</insert>
 
-</select>
+	<!-- 결과가 레코드가 한개일경우 CartVO리턴 결과가 2개이상일경우 ArrayList -->
+	<select id="list" resultType="CartVO">
+		SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno
+    FROM p_content c, p_box b
+    WHERE c.p_contentno = b.p_contentno
+    ORDER BY cartno ASC
+
+	</select>
+
+	<!-- 파라메타에서 값을저장하고 리절트에서 값을 불러온다. -->
+	<!-- SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno 
+		FROM p_content c, p_box b WHERE c.p_contentno = b.p_contentno; -->
+	<select id="list2" resultType="CartVO" parameterType="int">
+		SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno, c.file
+		FROM p_content c, p_box b
+		WHERE c.p_contentno = b.p_contentno and mno = #{mno}
+		ORDER BY cartno ASC
+
+	</select>
 
 
-<update id="update" parameterType="CartVO">
-UPDATE p_box
-SET cnt=#{cnt}
-WHERE cartno=#{cartno}
-</update>
+	<update id="update" parameterType="CartVO">
+		UPDATE p_box
+		SET pcnt=#{pcnt}
+		WHERE cartno=#{cartno}
+	</update>
+	
+	<update id="update2" parameterType="CartVO">
+    UPDATE p_box
+    SET pcnt=#{pcnt}
+    WHERE cartno=#{cartno}
+  </update>
 
-<delete id="delete" parameterType="int">
-DELETE FROM p_box
-WHERE cartno=#{cartno}
-</delete>
+	<delete id="delete" parameterType="int">
+		DELETE FROM p_box
+		WHERE cartno=#{cartno}
+	</delete>
+	
+	<delete id="delete2" parameterType="int">
+    DELETE FROM p_box
+    WHERE cartno=#{cartno}
+  </delete>
 
 
 

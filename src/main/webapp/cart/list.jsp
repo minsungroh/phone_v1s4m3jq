@@ -26,7 +26,7 @@ function create(){
   $('#mno').val('');
   $('#producttitle').val('');
   $('#productno').val('');
-  $('cnt').val('');
+  $('pcnt').val('');
   $('total').val('');
   $('#submit').html('등록');
   $('#sort').focus();
@@ -36,11 +36,11 @@ function create_cancel(){
   $('#panel_frm').hide();
 }
  
-function update(cartno, cnt){
+function update(cartno, pcnt){
   $('#panel_update').show();
   $('#frm').attr('action', './update.do');
   $('#cartno').attr('value', cartno);
-  $('#cnt').attr('value', cnt);
+  $('#pcnt').attr('value', pcnt);
   $('#submit').html('저장');
   $('#sort').focus();
 }
@@ -75,8 +75,8 @@ ArrayList<CartVO> list = (ArrayList<CartVO>)request.getAttribute("list");
 <FORM name='update_frm' method='POST' action='./update.do'>
 <input type='hidden' name='cartno' id='cartno' value='0'>
   
-  <label for='cnt'>수량</label>
-  <input type='number' name='cnt' id='cnt'   value='1' required="required">
+  <label for='pcnt'>수량</label>
+  <input type='number' name='pcnt' id='pcnt'   value='1' required="required">
  
   <button type="submit" id='submit'>수정</button>
   <button type="button" onclick="update_cancel()">취소</button>
@@ -109,8 +109,8 @@ ArrayList<CartVO> list = (ArrayList<CartVO>)request.getAttribute("list");
   <label for='productno'>상품번호</label>
   <input type='number' name='productno' id='productno' value='1' required="required"><br>
   
-  <label for='cnt'>수량</label>
-  <input type='number' name='cnt' id='cnt'   value='1' required="required">
+  <label for='pcnt'>수량</label>
+  <input type='number' name='pcnt' id='pcnt'   value='1' required="required">
   
   <label for='total'>합계</label>
   <input type='number' name='total' id='total'   value='10000' required="required">
@@ -128,16 +128,18 @@ ArrayList<CartVO> list = (ArrayList<CartVO>)request.getAttribute("list");
     <col style='width: 20%;'/>
     <col style='width: 15%;'/>
     <col style='width: 10%;'/>
+    <col style='width: 10%;'/>
     <col style='width: 20%;'/>
-    <col style='width: 15%;'/>
+    <col style='width: 10%;'/>
   </colgroup>
   <TR>
     <TH class='th'>장바구니번호</TH>
     <TH class='th'>회원번호</TH>
     <TH class='th'>상품 이름</TH>
     <TH class='th'>상품 번호</TH>
+    <TH class='th'>단가</TH>
     <TH class='th'>수량</TH>
-    <TH class='th'>합계</TH>
+    <TH class='th'>금액</TH>
     <TH class='th'>수정</TH>
   </TR>
  
@@ -145,19 +147,24 @@ ArrayList<CartVO> list = (ArrayList<CartVO>)request.getAttribute("list");
   for(int index=0; index < list.size(); index++){
     CartVO vo = list.get(index);
     int cartno = vo.getCartno();
+    int pcnt = vo.getPcnt();
+    int money= vo.getMoney();
+    int tot = pcnt * money;
+    String file = vo.getFile();
  
 %> 
   <TR>
     <TD class='td'><%=cartno %></TD>
     <TD class='td'>
-    <a href="./list2.do?cartno=<%=cartno %>&mno=<%=vo.getMno()%>"><%=vo.getMno() %></a>
+    <a href="./list2.do?mno=<%=vo.getMno()%>"><%=vo.getMno() %></a>
     </TD>
-    <TD class='td'><%=vo.getProducttitle() %></TD>
-    <TD class='td'><%=vo.getProductno() %></TD>
-    <TD class='td'><%=vo.getCnt() %></TD>
-    <TD class='td'><%=vo.getTotal() %></TD>
+    <TD class='td'><%=vo.getTitle() %></TD>
+    <TD class='td'><%=vo.getP_contentno()%></TD>
+    <TD class='td'><%=money %></TD>
+    <TD class='td'><%=pcnt %></TD>
+    <TD class='td'><%=tot %></TD>
     <TD class='td'>
-      <A href="javascript: update(<%=cartno%>,<%=vo.getCnt() %>)"><IMG src='./images/update.png' title='수정'></A>
+      <A href="javascript: update(<%=cartno%>,<%=pcnt%>)"><IMG src='./images/update.png' title='수정'></A>
       <A href="javascript: remove(<%=cartno%>)"><IMG src='./images/delete.png' title='삭제'></A>
     </TD>
     

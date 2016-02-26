@@ -14,6 +14,10 @@ public interface CartMapperInter {
 	
 	public int update(CartVO cartVO);
 	
+	public int update2(CartVO cartVO);
+	
 	//<delete id="delete" parameterType="int">
 	public int delete(int cartno);
+	
+	public int delete2(int cartno);
 }

@@ -85,7 +85,8 @@ ArrayList<P_categoryVO> list = (ArrayList<P_categoryVO>)request.getAttribute("li
       <%
       }else{
       %>
-        <li><a class='menuLink' href="#">장바구니</a></li>      
+        <li><a class='menuLink' href="<%=root%>/cart/list.do">장바구니</a></li> 
+        <li><a class='menuLink' href="<%=root%>/cart/list2.do">개인장바구니</a></li>      
         <li><a class='menuLink' href="#">마이페이지</a></li>
         <li><a class='menuLink' href="#">고객센터</a></li>
         <li><a class='menuLink' href='<%=root %>/member/logout.do'>로그아웃</a></li>      

@@ -1,19 +1,24 @@
 package com.phone.cart;
 
 public class CartVO {
-/*	cartno                        		SMALLINT		 NOT NULL  PRIMARY KEY AUTO_INCREMENT COMMENT '장바구니번호',
-	mno                      		MEDIUMINT		 NOT NULL COMMENT '회원번호',
-	producttitle                  		VARCHAR(200)		 NOT NULL COMMENT '상품이름',
-	productno                     		SMALLINT		 NOT NULL COMMENT '상품번호',
-	cnt 									SMALLINT        NOT NULL COMMENT '수량',
-	total                         		INT		 NULL  COMMENT '합계'*/
+	/*  cartno                            SMALLINT     NOT NULL  PRIMARY KEY AUTO_INCREMENT COMMENT '장바구니번호',
+	    pcnt                  SMALLINT        NOT NULL COMMENT '수량',
+	    tot                             INT    NULL  COMMENT '합계',
+	    mno                               INT   NOT NULL   ,
+	    p_contentno                         MEDIUMINT     NOT NULL,
+	    FOREIGN KEY (mno) REFERENCES member (mno),
+	    FOREIGN KEY (p_contentno) REFERENCES p_content (p_contentno)
+	) COMMENT='장바구니';*/
+
 	
 	private int cartno;
+	private int pcnt;
+	private int tot;
 	private int mno;
-	private String producttitle;
-	private int productno;
-	private int cnt;
-	private int total;
+	private int p_contentno;
+	private String title;
+	private int money;
+	private String file;
 	
 	public int getCartno() {
 		return cartno;
@@ -21,36 +26,51 @@ public class CartVO {
 	public void setCartno(int cartno) {
 		this.cartno = cartno;
 	}
+	public int getPcnt() {
+		return pcnt;
+	}
+	public void setPcnt(int pcnt) {
+		this.pcnt = pcnt;
+	}
+	public int getTot() {
+		return tot;
+	}
+	public void setTot(int tot) {
+		this.tot = tot;
+	}
 	public int getMno() {
 		return mno;
 	}
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public String getProducttitle() {
-		return producttitle;
+	public int getP_contentno() {
+		return p_contentno;
 	}
-	public void setProducttitle(String producttitle) {
-		this.producttitle = producttitle;
+	public void setP_contentno(int p_contentno) {
+		this.p_contentno = p_contentno;
 	}
-	public int getProductno() {
-		return productno;
+	public String getTitle() {
+		return title;
 	}
-	public void setProductno(int productno) {
-		this.productno = productno;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public int getCnt() {
-		return cnt;
+	public int getMoney() {
+		return money;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setMoney(int money) {
+		this.money = money;
 	}
-	public int getTotal() {
-		return total;
+	public String getFile() {
+		return file;
 	}
-	public void setTotal(int total) {
-		this.total = total;
+	public void setFile(String file) {
+		this.file = file;
 	}
+	
+	
+	
 	
 	
 	
