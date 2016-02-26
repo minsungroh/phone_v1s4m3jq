@@ -143,6 +143,7 @@ public class P_contentCont {
       mav.addObject("mno", mno);
     }
 
+    
     P_categoryVO vo = p_categoryDAO.read(p_categoryno);
     mav.addObject("title", vo.getTitle());
     //mav.addObject("title", p_categoryDAO.read(p_categoryno).getTitle());

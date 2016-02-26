@@ -158,8 +158,13 @@ public class CartCont {
 	        System.out.println("-->mno: " + mno);
 	        cartVO.setMno(mno);
 	        mav.addObject("mno", mno);
+	        mav.setViewName("/cart/list2");
+	    }else{
+	    	mav.setViewName("redirect:/member/login.do");
 	    }
-	    mav.setViewName("/cart/list2");
+	    
+	    
+	    
 	    mav.addObject("list", cartDAO.list2(cartVO.getMno()));
 	    mav.addObject("CartVO", cartVO);
 	   //mav.addObject("title", blogcategoryDAO.read(blogVO.getBlogcategoryno()).getTitle());

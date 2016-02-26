@@ -15,7 +15,7 @@ CREATE TABLE p_box(
 
 2. 등록
 INSERT INTO p_box(pcnt, tot, mno, p_contentno)
-VALUES (1, 30000 , 1 , 1 );
+VALUES (1, 30000 , 1 , 1  );
  
 INSERT INTO p_box(pcnt, tot, mno, p_contentno)
 VALUES (1, 40000 , 2 , 2 );
@@ -33,13 +33,12 @@ cartno pcnt tot   mno p_contentno
       6    3 90000   3           1
  
 
-SELECT cartno,pcnt,tot,mno,p_contentno FROM p_box;
+SELECT cartno,pcnt,tot,mno,p_contentno,rdate FROM p_box;
       
- cartno pcnt tot   mno p_contentno
- ------ ---- ----- --- -----------
-      4    1 30000   1           1
-      5    1 40000   2           2
-      6    3 90000   3           1
+ cartno pcnt tot   mno p_contentno rdate
+ ------ ---- ----- --- ----------- ----------
+      1    1 30000   1           1 2016-02-26
+
 
 SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno 
 FROM p_content c, p_box b
@@ -73,14 +72,19 @@ ORDER BY cartno ASC
 
 
 4)조회
-SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno, c.file
+SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno, c.file, c.p_categoryno
 FROM p_content c, p_box b
 WHERE c.p_contentno = b.p_contentno and mno = 1;
  
+ cartno title          money  pcnt tot mno p_contentno file            p_categoryno
+ ------ -------------- ------ ---- --- --- ----------- --------------- ------------
+     27 fhf             30000    3   0   1           9 12_mini.jpg                1
+     25 iphone6 + ?케이스 500000   20   0   1          10 cookie_mini.jpg            1
+     26 iphone6 + ?케이스 500000   30   0   1          10 cookie_mini.jpg            1
+     28 iphone6 + ?케이스 500000    1   0   1          10 cookie_mini.jpg            1
+     30 iphone6 + ?케이스 500000    1   0   1          10 cookie_mini.jpg            1
+     34 iphone6 + ?케이스 500000    1   0   1          10 cookie_mini.jpg            1
 
- cartno mno producttitle p_contentno pcnt total
- ------ --- ------------ --------- --- -----
-      2   2 배터리                  2   1 10000
 
 
 4. 수정

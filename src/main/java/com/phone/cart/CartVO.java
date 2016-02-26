@@ -19,6 +19,7 @@ public class CartVO {
 	private String title;
 	private int money;
 	private String file;
+	private int p_categoryno;
 	
 	public int getCartno() {
 		return cartno;
@@ -67,6 +68,12 @@ public class CartVO {
 	}
 	public void setFile(String file) {
 		this.file = file;
+	}
+	public int getP_categoryno() {
+		return p_categoryno;
+	}
+	public void setP_categoryno(int p_categoryno) {
+		this.p_categoryno = p_categoryno;
 	}
 	
 	

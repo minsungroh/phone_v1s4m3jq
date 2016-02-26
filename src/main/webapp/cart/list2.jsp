@@ -2,6 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.phone.cart.CartVO" %>
 <%@ page import="web.tool.Tool" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -70,12 +72,12 @@ function remove(cartno){
     <table class="table" style='width: 100%;'>
       <colgroup>
         <col style="width: 5%;"></col>
-        <col style="width: 35%;"></col>
-        <col style="width: 5%;"></col>
-        <col style="width: 15%;"></col>
+        <col style="width: 30%;"></col>
         <col style="width: 10%;"></col>
         <col style="width: 15%;"></col>
-        <col style="width: 5%;"></col>
+        <col style="width: 10%;"></col>
+        <col style="width: 10%;"></col>
+        <col style="width: 10%;"></col>
         <col style="width: 10%;"></col>
       </colgroup>
           
@@ -90,50 +92,70 @@ function remove(cartno){
           <th class="th">수량</th>
           <th class="th">금액</th>
           <th class="th">기타</th>
+          <th class="th">선택</th>
         </tr>
       
       </thead>
-      
+      <%
+      int all = 0 ;
+      %>
       <%-- table 내용 --%>
       <tbody>
         <%
+       
           for(int index = 0; index < list.size(); index++){
             CartVO vo = list.get(index);
             int cartno = vo.getCartno();
             int pcnt = vo.getPcnt();
             int money= vo.getMoney();
             int tot = pcnt * money;
+            int p_categoryno = vo.getP_categoryno();
+            
+            int p_contentno= vo.getP_contentno();
             String file = vo.getFile();
+            
+            all = all + tot;
             
           %>
           <tr>
             <td class="td"><%=cartno %></td>
             <td class="td_left">
-              <a href="./read.do?cartno=<%=cartno %>&mno=<%=vo.getMno()%>"><%=Tool.textLength(10, vo.getTitle())%></a> 
+              <a href="../p_content/read.do?p_contentno=<%=p_contentno %>&p_categoryno=<%=p_categoryno %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
             </td>
            
             <td class="td"><img src="../p_content/storage/<%=file %>" style="float: left; width:100px;"></td>
-            <td class="td">도착 예정일</td>
-            <td class="td"><%=money %></td>
             <td class="td">
-            <input type='number' name='pcnt' id='pcnt_<%=index %>'   value='<%=pcnt %>' required="required" maxlength="3">
-            <a href="javascript: update('pcnt_<%=index%>', <%=cartno%>)"><img src="./images/update.png" title="수정" /></a>
+             2일뒤 도착
             </td>
-            <td class="td"><%=tot %></td>
+            <td class="td"><fmt:formatNumber value="<%=money %>" pattern="#,###,###" />원</td>
+            <td class="td">
+            <input type='number' name='pcnt' id='pcnt_<%=index %>'   value='<%=pcnt %>' required="required" min="1" max="5" step="1" style="width:40px;">
+            <a href="javascript: update('pcnt_<%=index%>', <%=cartno%>)"><img src="./images/btn_modify.gif" title="수정" /></a>
+            </td>
+            <td class="td"><fmt:formatNumber value="<%=tot %>" pattern="#,###,###" /> 원</td>
             <td class="td">
               
-              <A href="javascript: remove(<%=cartno%>)"><img src="./images/delete.png" title="삭제" /></a>
-             <%=vo.getMno()%>
+              <A href="javascript: remove(<%=cartno%>)"><img src="./images/delete.gif" title="삭제" /></a>
+             
+            </td>
+            <td class="td">
+             <input type="radio" name='s_cart' id="s_cart<%=cartno %>">
             </td>
           </tr>
           <%  
         }
         %>
+        
+        
       </tbody>
     </table>
-    
-    <button>주문</button>
-    <br><br>
+    합계 :<%=all %>
+    <DIV class='bottom'>
+   
+    <br>
+   <button type='button' onclick="create();">주문</button>
+  <button type='button' onclick="location.reload();">새로 고침</button>
+</DIV>
   </div>
 <%-- ---------------------------------------------------------------------------------------------- --%>
 <jsp:include page="/menu/bottom.jsp" flush='false' />

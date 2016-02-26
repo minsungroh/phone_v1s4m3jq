@@ -32,7 +32,7 @@ function buy(p_contentno, mno){
     }
     
 function buy1(){
-	if('<%=Tool.isMember(request)%>' != 'true'){
+	if('<%=Tool.isMember(request)%>' != 'true') {
      location.href="../member/login.do";
  }
     

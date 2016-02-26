@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno 
 		FROM p_content c, p_box b WHERE c.p_contentno = b.p_contentno; -->
 	<select id="list2" resultType="CartVO" parameterType="int">
-		SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno, c.file
+		SELECT b.cartno, c.title, c.money, b.pcnt, b.tot, b.mno, b.p_contentno, c.file, c.p_categoryno
 		FROM p_content c, p_box b
 		WHERE c.p_contentno = b.p_contentno and mno = #{mno}
 		ORDER BY cartno ASC
